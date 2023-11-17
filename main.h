@@ -49,6 +49,8 @@ void delete_letter(char *s, const char d[]);
 void free_s(stack_t *s);
 int delete_dnodeint_at_index(stack_t **head, unsigned int index);
 
+void add(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
