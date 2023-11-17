@@ -33,7 +33,7 @@ void next_main(char *code)
 		delete_letter(line[i], " ");
 		current_code = str_splt(line[i], " ");
 		current_line = current_code;
-		for (j = 0; j < 4; j++)
+		for (j = 0; j < 5; j++)
 		{
 			if (_strcmp(current_code[0], instructions[j].opcode) == 0)
 			{
