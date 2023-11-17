@@ -37,6 +37,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+instruction_t instructions[7];
 extern char **current_line;
 char *_strcpy(char *dest, char *src);
 size_t letters_f(const char *file);

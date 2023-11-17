@@ -1,7 +1,17 @@
 #include "main.h"
-#include "ext.h"
+
 char **current_line = NULL;
 
+
+instruction_t instructions[7] = {
+	{"push", push},
+	{"pall", pall},
+	{"pop", pop},
+	{"pint", pint},
+	{"nop", nop},
+	{"swap", swap},
+	{"add", add}
+};
 /**
  * next_main - continuation of next function
  * @code: the contain of opcode file
@@ -15,18 +25,7 @@ void next_main(char *code)
 	stack_t *stack = NULL;
 	char **current_code = NULL;
 	size_t j = 0;
-	instruction_t instructions[7];
 
-	instructions[0].opcode = "push";
-	instructions[0].f = push;
-	instructions[1].opcode = "pall";
-	instructions[1].f = pall;
-	instructions[2].opcode = "nop";
-	instructions[2].f = nop;
-	instructions[3].opcode = "pint";
-	instructions[3].f = pint;
-	instructions[4].opcode = "pop";
-	instructions[4].f = pop;
 	line = str_splt(code, "\n");
 	while (line[i] != NULL)
 	{

@@ -1,5 +1,4 @@
 #include "main.h"
-#include "ext.h"
 /**
  * push - to add a new element
  * @stack: the stack
