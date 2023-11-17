@@ -15,7 +15,7 @@ void next_main(char *code)
 	stack_t *stack = NULL;
 	char **current_code = NULL;
 	size_t j = 0;
-	instruction_t instructions[5];
+	instruction_t instructions[7];
 
 	instructions[0].opcode = "push";
 	instructions[0].f = push;
@@ -25,15 +25,15 @@ void next_main(char *code)
 	instructions[2].f = nop;
 	instructions[3].opcode = "pint";
 	instructions[3].f = pint;
-	line = str_splt(code, "\n");
 	instructions[4].opcode = "pop";
 	instructions[4].f = pop;
+	line = str_splt(code, "\n");
 	while (line[i] != NULL)
 	{
 		delete_letter(line[i], " ");
 		current_code = str_splt(line[i], " ");
 		current_line = current_code;
-		for (j = 0; j < 2; j++)
+		for (j = 0; j < 4; j++)
 		{
 			if (_strcmp(current_code[0], instructions[j].opcode) == 0)
 			{
