@@ -21,6 +21,8 @@ void next_main(char *code)
 	instructions[0].f = push;
 	instructions[1].opcode = "pall";
 	instructions[1].f = pall;
+	instructions[2].opcode = "nop";
+	instructions[2].f = nop;
 	line = str_splt(code, "\n");
 	while (line[i] != NULL)
 	{

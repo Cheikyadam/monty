@@ -46,3 +46,17 @@ void pall(stack_t **stack, unsigned int line_number)
 		(*stack) = (*stack)->next;
 	}
 }
+
+/**
+ * nop - to add a new element
+ * @stack: the stack
+ * @line_number: the number of line
+ *
+ * Return: Nothing
+ */
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+	(void)(stack);
+}
