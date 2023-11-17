@@ -15,7 +15,7 @@ void next_main(char *code)
 	stack_t *stack = NULL;
 	char **current_code = NULL;
 	size_t j = 0;
-	instruction_t instructions[3];
+	instruction_t instructions[4];
 
 	instructions[0].opcode = "push";
 	instructions[0].f = push;
@@ -23,6 +23,8 @@ void next_main(char *code)
 	instructions[1].f = pall;
 	instructions[2].opcode = "nop";
 	instructions[2].f = nop;
+	instructions[3].opcode = "pint";
+	instructions[3].f = pint;
 	line = str_splt(code, "\n");
 	while (line[i] != NULL)
 	{
