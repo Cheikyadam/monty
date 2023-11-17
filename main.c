@@ -15,7 +15,7 @@ void next_main(char *code)
 	stack_t *stack = NULL;
 	char **current_code = NULL;
 	size_t j = 0;
-	instruction_t instructions[4];
+	instruction_t instructions[5];
 
 	instructions[0].opcode = "push";
 	instructions[0].f = push;
@@ -26,6 +26,8 @@ void next_main(char *code)
 	instructions[3].opcode = "pint";
 	instructions[3].f = pint;
 	line = str_splt(code, "\n");
+	instructions[4].opcode = "pop";
+	instructions[4].f = pop;
 	while (line[i] != NULL)
 	{
 		delete_letter(line[i], " ");
