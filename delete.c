@@ -8,29 +8,29 @@
  * Return: -1 or 1
  */
 
-int delete_dnodeint_at_index(stack_t **head, unsigned int index)
+void delete_dnodeint_at_index(stack_t **head, unsigned int index)
 {
 	stack_t *p = (*head), *new = NULL;
 	unsigned int idx = 1;
 
 	if (head == NULL)
-		return (-1);
+		return;;
 	if ((*head) == NULL)
-		return (-1);
+		return;
 	if (index == 0)
 	{
 		if ((*head)->next == NULL)
 		{
 			free((*head));
 			(*head) = NULL;
-			return (1);
+			return;
 		}
 		new = p;
 		(*head) = (*head)->next;
 		(*head)->prev = NULL;
 		free(new);
 		new = NULL;
-		return (1);
+		return;
 	}
 	while (p->next != NULL && idx != index)
 	{
@@ -38,7 +38,7 @@ int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 		idx++;
 	}
 	if (p->next == NULL)
-		return (-1);
+		return;
 
 	new = p->next;
 	if (new->next != NULL)
@@ -46,7 +46,7 @@ int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 	p->next = new->next;
 	free(new);
 	new = NULL;
-	return (1);
+	return;
 }
 
 /**
