@@ -44,13 +44,9 @@ void push(stack_t **stack, unsigned int line_number)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-	char *opc = NULL;
 	stack_t *move = (*stack);
 
-	opc = line[line_number - 1];
-	delete_letter(opc, " ");
-	if (opc[4] != '\0')
-		error_i(line_number, (*stack));
+	(void)line_number;
 	if ((*stack) == NULL)
 		return;
 	while ((move) != NULL)

@@ -52,6 +52,7 @@ void delete_dnodeint_at_index(stack_t **head, unsigned int index);
 
 void next_main1(char *code);
 void next_main2(char *code, instruction_t instructions[7]);
+void next_main3(char **line, instruction_t instructions[7], stack_t *stack);
 
 void error_m(void);
 void error(char *msg, int c_line, char **current_line, stack_t *s);

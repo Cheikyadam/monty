@@ -32,12 +32,8 @@ void next_main1(char *code)
  */
 void next_main2(char *code, instruction_t instructions[7])
 {
-	int i = 0, in = 0;
 	stack_t *stack = NULL;
-	char **current_code = NULL;
-	size_t j = 0;
 	const char d[] = "\n";
-	const char ds[] = " ";
 
 	if (code[0] == '\0')
 	{
@@ -48,10 +44,37 @@ void next_main2(char *code, instruction_t instructions[7])
 	free_c(code);
 	if (line == NULL)
 		error_m();
+
+	next_main3(line, instructions, stack);
+	free_s(&stack);
+	free_p(line);
+}
+
+/**
+ * next_main3 - main
+ * @line: the line
+ * @instructions
+ * @stack: the stack
+ *
+ * Return: Nothing
+ */
+void next_main3(char **line, instruction_t instructions[7], stack_t *stack)
+{
+
+	int i = 0, in = 0;
+	char **current_code = NULL;
+	size_t j = 0;
+
 	while (line[i] != NULL)
 	{
+		if (line[i][0] == '\0')
+		{
+			i++;
+			continue;
+		}
 		in = 0;
-		current_code = str_splt(line[i], ds);
+		delete_letter(line[i], " ");
+		current_code = str_splt(line[i], " ");
 		for (j = 0; j < 8; j++)
 		{
 			if (_strcmp(current_code[0], instructions[j].opcode) == 0)
@@ -70,8 +93,6 @@ void next_main2(char *code, instruction_t instructions[7])
 		}
 		i++;
 	}
-	free_s(&stack);
-	free_p(line);
 }
 
 /**

@@ -24,9 +24,11 @@ void error_m(void)
 
 void error_i(int c_line, stack_t *s)
 {
+	char **current = str_splt(line[c_line - 1], " ");
 
 	fprintf(stderr, "L%d: unknown instruction %s\n",
-			c_line, line[c_line - 1]);
+			c_line, current[0]);
+	free_p(current);
 	free_p(line);
 	free_s(&s);
 	exit(EXIT_FAILURE);
