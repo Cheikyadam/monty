@@ -32,38 +32,36 @@ void next_main1(char *code)
  */
 void next_main2(char *code, instruction_t instructions[7])
 {
-	stack_t *stack = NULL;
 	const char d[] = "\n";
 
 	if (code[0] == '\0')
 	{
 		free_c(code);
-		error("unknown instruction", 1, NULL, stack);
+		error("unknown instruction", 1, NULL, NULL);
 	}
 	line = str_splt(code, d);
 	free_c(code);
 	if (line == NULL)
 		error_m();
 
-	next_main3(line, instructions, stack);
-	free_s(&stack);
+	next_main3(line, instructions);
 	free_p(line);
 }
 
 /**
  * next_main3 - main
  * @line: the line
- * @instructions
- * @stack: the stack
+ * @instructions: instructions
  *
  * Return: Nothing
  */
-void next_main3(char **line, instruction_t instructions[7], stack_t *stack)
+void next_main3(char **line, instruction_t instructions[7])
 {
 
 	int i = 0, in = 0;
 	char **current_code = NULL;
 	size_t j = 0;
+	stack_t *stack = NULL;
 
 	while (line[i] != NULL)
 	{
@@ -81,7 +79,7 @@ void next_main3(char **line, instruction_t instructions[7], stack_t *stack)
 			{
 				in = 1;
 				free_p(current_code);
-				instructions[j].f(&stack, (i + 1));
+				instructions[j].f((&stack), (i + 1));
 				break;
 			}
 
@@ -89,10 +87,11 @@ void next_main3(char **line, instruction_t instructions[7], stack_t *stack)
 		if (in == 0)
 		{
 			free_p(current_code);
-			error_i(i + 1, stack);
+			error_i(i + 1, (stack));
 		}
 		i++;
 	}
+	free_s(&stack);
 }
 
 /**
