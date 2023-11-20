@@ -37,8 +37,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-instruction_t instructions[7];
-extern char **current_line;
+extern char **line;
+
 char *_strcpy(char *dest, char *src);
 size_t letters_f(const char *file);
 int _strlen(char *s);
@@ -47,8 +47,15 @@ void free_p(char **a);
 void free_c(char *s);
 int _strcmp(char *s1, char *s2);
 void delete_letter(char *s, const char d[]);
-void free_s(stack_t *s);
+void free_s(stack_t **s);
 void delete_dnodeint_at_index(stack_t **head, unsigned int index);
+
+void next_main1(char *code);
+void next_main2(char *code, instruction_t instructions[7]);
+
+void error_m(void);
+void error(char *msg, int c_line, char **current_line, stack_t *s);
+void error_i(int c_line, stack_t *s);
 
 void add(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);

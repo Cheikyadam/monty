@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * letters_f - number of bytes of a file

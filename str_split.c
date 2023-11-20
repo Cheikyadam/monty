@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * len_w - len of a char
@@ -57,7 +57,7 @@ char **str_splt(char *ch, const char d[])
 
 	if (ch == NULL)
 		return (NULL);
-	tab = (char **)malloc(size(ch, d) * sizeof(*tab));
+	tab = malloc(size(ch, d) * sizeof(*tab));
 	if (tab == NULL)
 		return (NULL);
 	for (j = 0; j < size(ch, d); j++)
@@ -70,7 +70,7 @@ char **str_splt(char *ch, const char d[])
 			if (i != 0)
 				w_i = i + 1;
 			w = len_w(ch, w_i, d);
-			tab[t] = (char *)malloc(w + 1);
+			tab[t] = malloc(w + 1);
 			if (tab[t] == NULL)
 			{
 				for (k = 0; k <= t; k++)

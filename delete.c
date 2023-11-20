@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * delete_dnodeint_at_index - deleting
@@ -14,7 +14,7 @@ void delete_dnodeint_at_index(stack_t **head, unsigned int index)
 	unsigned int idx = 1;
 
 	if (head == NULL)
-		return;;
+		return;
 	if ((*head) == NULL)
 		return;
 	if (index == 0)
@@ -46,7 +46,6 @@ void delete_dnodeint_at_index(stack_t **head, unsigned int index)
 	p->next = new->next;
 	free(new);
 	new = NULL;
-	return;
 }
 
 /**
@@ -76,16 +75,24 @@ size_t dlistint_len(const stack_t *h)
  * Return: Nothing
  */
 
-void free_s(stack_t *s)
+
+void free_s(stack_t **s)
 {
-	unsigned int size = 0, i;
+	stack_t *current = (*s);
 
 	if (s != NULL)
 	{
-		size = dlistint_len(s);
-		for (i = 0; i < size; i++)
+		if ((*s) != NULL)
 		{
-			delete_dnodeint_at_index(&s, i);
+			while ((*s) != NULL)
+			{
+				current = (*s);
+				(*s) = (*s)->next;
+				free(current);
+				current = NULL;
+
+			}
 		}
 	}
+	(*s) = NULL;
 }

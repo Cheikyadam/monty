@@ -1,55 +1,79 @@
-#include "main.h"
+#include "monty.h"
 
-char **current_line = NULL;
+char **line = NULL;
 
-
-instruction_t instructions[7] = {
-	{"push", push},
-	{"pall", pall},
-	{"pop", pop},
-	{"pint", pint},
-	{"nop", nop},
-	{"swap", swap},
-	{"add", add}
-};
 /**
- * next_main - continuation of next function
- * @code: the contain of opcode file
+ * next_main1 - helper main
+ * @code: the code
  *
  * Return: Nothing
  */
-void next_main(char *code)
+
+void next_main1(char *code)
 {
-	char **line = NULL;
-	int i = 0;
+
+	instruction_t instructions[7] = {
+		{"push", push},
+		{"pall", pall},
+		{"pop", pop},
+		{"pint", pint},
+		{"nop", nop},
+		{"swap", swap},
+		{"add", add}
+	};
+	next_main2(code, instructions);
+}
+/**
+ * next_main2 - continuation of next function
+ * @code: the contain of opcode file
+ * @instructions: instructions in opcode
+ *
+ * Return: Nothing
+ */
+void next_main2(char *code, instruction_t instructions[7])
+{
+	int i = 0, in = 0;
 	stack_t *stack = NULL;
 	char **current_code = NULL;
 	size_t j = 0;
+	const char d[] = "\n";
+	const char ds[] = " ";
 
-	line = str_splt(code, "\n");
+	if (code[0] == '\0')
+	{
+		free_c(code);
+		error("unknown instruction", 1, NULL, stack);
+	}
+	line = str_splt(code, d);
+	free_c(code);
+	if (line == NULL)
+		error_m();
 	while (line[i] != NULL)
 	{
-		delete_letter(line[i], " ");
-		current_code = str_splt(line[i], " ");
-		current_line = current_code;
+		in = 0;
+		current_code = str_splt(line[i], ds);
 		for (j = 0; j < 8; j++)
 		{
 			if (_strcmp(current_code[0], instructions[j].opcode) == 0)
 			{
+				in = 1;
+				free_p(current_code);
 				instructions[j].f(&stack, (i + 1));
 				break;
 			}
 
 		}
-
+		if (in == 0)
+		{
+			free_p(current_code);
+			error_i(i + 1, stack);
+		}
 		i++;
 	}
-	free_s(stack);
-	free_p(current_code);
+	free_s(&stack);
 	free_p(line);
-
-
 }
+
 /**
  * main - the main function
  * @argc: number of args
@@ -82,19 +106,14 @@ int main(int argc, char **argv)
 	nb = letters_f(argv[1]);
 	code = malloc(nb + 1);
 	if (code == NULL)
-	{
-		write(STDERR_FILENO, "Error: malloc failed\n",
-				_strlen("Error: malloc failed\n"));
-		exit(EXIT_FAILURE);
-	}
+		error_m();
 	r = read(fd, code, nb);
 	if (r > 0)
 	{
 		code[r - 1] = '\0';
 	}
 	close(fd);
-	next_main(code);
-	free_c(code);
+	next_main1(code);
 	return (0);
 
 }
