@@ -10,8 +10,12 @@
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
+	char *opc = NULL;
 
+	opc = line[line_number - 1];
+	delete_letter(opc, " ");
+	if (opc[3] != '\0')
+		error_i(line_number, (*stack));
 	if ((*stack) == NULL)
 		return;
 	delete_dnodeint_at_index(stack, 0);
@@ -28,8 +32,12 @@ void pop(stack_t **stack, unsigned int line_number)
 void swap(stack_t **stack, unsigned int line_number)
 {
 	int c;
+	char *opc = NULL;
 
-	(void)line_number;
+	opc = line[line_number - 1];
+	delete_letter(opc, " ");
+	if (opc[4] != '\0')
+		error_i(line_number, (*stack));
 	if ((*stack) == NULL)
 		return;
 	c = (*stack)->n;
@@ -49,8 +57,12 @@ void swap(stack_t **stack, unsigned int line_number)
 
 void add(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
+	char *opc = NULL;
 
+	opc = line[line_number - 1];
+	delete_letter(opc, " ");
+	if (opc[4] != '\0')
+		error_i(line_number, (*stack));
 	if ((*stack) == NULL)
 		return;
 	if ((*stack)->next == NULL)
